@@ -128,7 +128,7 @@ local function declareWinnerOfGame(): ()
     GameService.Client.GameDecision:FireAll(winner)
 end
 
---
+--assign the player that just joined team with the least amount of people
 local function playerAdded(player: Player): ()
     local leastPersonTeam: string = getLeastPersonTeam()
 
