@@ -39,6 +39,7 @@ local GUN_RAYS_FOLDER: Folder
 ------------------------------Service Dependencies-----------------------------------
 
 local DataService
+local GameService
 
 ------------------------------Knit Service-----------------------------------
 
@@ -278,6 +279,8 @@ local function characterAdded(char: Model): ()
 
         local data = DataService:GetPlayerData(player)
         data.kills += 1
+
+        GameService:IncrementKills(player)
     end)
 
     -- it happens sometimes when the character is loading
@@ -390,6 +393,7 @@ end
 -- define global lifetime services
 function GunService:KnitInit(): ()
     DataService = Knit.GetService("DataService")
+	GameService = Knit.GetService("GameService")
 end
 
 -- start up logic
