@@ -43,7 +43,7 @@ local HudController = Knit.CreateController({
 
 ------------------------Local Functions-------------------------
 
---
+-- watch the attributes on each player to keep track of the scores for the specific team passed
 local function countScore(scoreLabel: TextLabel, team: string): ()
 	local function count(): ()
 		local score: number = 0
@@ -71,7 +71,7 @@ local function countScore(scoreLabel: TextLabel, team: string): ()
 	end
 end
 
---
+-- disable all game counts (time / scores) and display who won the last round
 local function showGameWinner(gameWinner: string?): ()
 	gameDecisionNum += 1
 	local localGameDecisionNum = gameDecisionNum
@@ -92,7 +92,8 @@ local function showGameWinner(gameWinner: string?): ()
 	blueScore.Visible = false
 	gameTimeFrame.Visible = false
 	winner.Visible = true
-	
+
+	-- revert to the old state after a few seconds
 	task.delay(3, function(): ()
 		if localGameDecisionNum ~= gameDecisionNum then
 			return
@@ -105,7 +106,7 @@ local function showGameWinner(gameWinner: string?): ()
 	end)
 end
 
---
+-- update the game time label
 local function bridgeRegenTimeLeftChanged(): ()
 	local timeLeft: number = workspace:GetAttribute(GAME_TIME_LEFT_ATTR)
 
@@ -142,7 +143,7 @@ function HudController:GuiLoaded(hud: ScreenGui): ()
 
 	local killsKey: string = "kills"
 	local lastKills: number
-	
+
 	DataController:OnValueChanged(Knit.Player, killsKey, function(kills: number): ()
 		if lastKills then
 			-- play a amusing sound when the player gets a kill

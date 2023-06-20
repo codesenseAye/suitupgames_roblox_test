@@ -3,11 +3,7 @@
 ]]
 
 local defaultData = {
-	money = 0,
-	paycheck = 0,
 	kills = 0,
-	paycheckWithdrawAmount = 0,
-	padsPurchased = {}
 }
 
 -- recursively freeze all table elements in the table passed and itself

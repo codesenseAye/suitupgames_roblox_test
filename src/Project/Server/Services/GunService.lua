@@ -122,6 +122,8 @@ end
 -- so that we dont have to rely on roblox's unreliable character spawning system
 local function respawnCharacter(player: Player): ()
     task.spawn(function(): ()
+        -- make sure there is somewhere to spawn before loading there character
+        workspace:WaitForChild("Map")
         player:LoadCharacter()
     end)
 end

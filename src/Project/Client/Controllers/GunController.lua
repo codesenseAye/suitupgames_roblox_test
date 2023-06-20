@@ -12,14 +12,9 @@ local UserInputService = game:GetService("UserInputService")
 
 local Knit = require(ReplicatedStorage.Packages.Knit)
 
-------------------------------Types-----------------------------------
-
-local Types = require(ReplicatedStorage.Shared.Types)
-
 ------------------------------Util-----------------------------------
 
 local Trove = require(ReplicatedStorage.Packages.Trove)
-local Promise = require(ReplicatedStorage.Packages.Promise)
 
 ------------------------------Constants-----------------------------------
 

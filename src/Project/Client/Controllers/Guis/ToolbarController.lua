@@ -1,5 +1,6 @@
 --[[
-    Handles toggling the players gun on/off and intriguing the player with a tooltip
+    Handles toggling the players gun on/off and showing its state via a ui stroke thickness / color
+    also disables the backpack ui
 ]]
 
 ------------------------------Roblox Services-----------------------------------
@@ -19,7 +20,6 @@ local GUN_STATE_ATTR: string = "GunState"
 ------------------------------Fields-----------------------------------
 
 local toolbar: ScreenGui
-local showTooltipNum: number = 0
 
 ------------------------------Service & Controller Dependencies-----------------------------------
 

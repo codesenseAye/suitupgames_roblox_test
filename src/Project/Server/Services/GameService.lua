@@ -13,10 +13,6 @@ local ServerStorage = game:GetService("ServerStorage")
 
 local Knit = require(ReplicatedStorage.Packages.Knit)
 
-------------------------------Types-----------------------------------
-
-local Types = require(ReplicatedStorage.Shared.Types)
-
 ------------------------------Util-----------------------------------
 
 local TableUtil = require(ReplicatedStorage.Packages.TableUtil)
@@ -49,7 +45,7 @@ local GameService = Knit.CreateService({
 
 ------------------------------Local Functions-----------------------------------
 
---
+-- delete the old map and clone/parent a new one
 local function regenMap(): ()
     -- using ServerStorage.Map so we are alerted with an error incase-
     -- we do not update the string literal after we might have change the model name
@@ -63,7 +59,7 @@ local function regenMap(): ()
     newMap.Parent = workspace
 end
 
---
+-- return the team that has the least amount of people on it
 local function getLeastPersonTeam(): string
     local blueTeamPeople: number = 0
     local redTeamPeople: number = 0
@@ -84,7 +80,7 @@ local function getLeastPersonTeam(): string
         BLUE_TEAM
 end
 
---
+-- randomize the teams that people are on and remove their kills count
 local function shuffleTeamsAndWipeKills(): ()
     local allPlayers: {Player} = Players:GetPlayers()
 
@@ -106,7 +102,7 @@ local function shuffleTeamsAndWipeKills(): ()
     end
 end
 
---
+-- fire the game decision remote with the name of the team that one by counting the kills of each player
 local function declareWinnerOfGame(): ()
     local blueKills: number = 0
     local redKills: number = 0
@@ -141,7 +137,7 @@ end
 
 ------------------------------Public Methods-----------------------------------
 
---
+-- set the kills count up by 1 of the player passed
 function GameService:IncrementKills(player: Player): ()
     local currentKills: number = player:GetAttribute(KILLS_ATTR) or 0
     currentKills += 1
@@ -163,6 +159,7 @@ function GameService:KnitStart(): ()
 
     local lastRegen: number = 0
 
+    -- every second count how much time is left in the game and do the necessary steps at the end when the game ends
     Timer.Simple(1, function(): ()
         local now: number = workspace:GetServerTimeNow()
         local timeLeft: number = math.max(0, math.ceil(GAME_TIME - (now - lastRegen)))
@@ -173,10 +170,14 @@ function GameService:KnitStart(): ()
             return
         end
 
+        -- dont declare a winner when there was no last game
+        if lastRegen ~= 0 then
+            declareWinnerOfGame()
+            shuffleTeamsAndWipeKills()
+        end
+
         lastRegen = now
 
-        declareWinnerOfGame()
-        shuffleTeamsAndWipeKills()
         regenMap()
     end)
 end

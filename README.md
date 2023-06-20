@@ -1,18 +1,5 @@
 # suitup-games roblox test
 
-### Development branch structure
-	Live Branch
-	Merge Branch
-	Developer Branches
-
-### Team development guide - for when your code additions are ready
-* Push to your branch
-* Checkout to the merge branch
-* Pull all developer branches including your own
-* Resolve all conflicts with your fellow developers
-* Once all conflicts are resolved push to the live branch
-* Pull the live branch into your own branch
-
 # Game description
 Knock your opponents off the ground with your shotgun into the lava pit to gain points! 
 
