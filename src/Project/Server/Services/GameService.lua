@@ -20,7 +20,7 @@ local Timer = require(ReplicatedStorage.Packages.Timer)
 
 ------------------------------Constants-----------------------------------
 
-local GAME_TIME: number = 60
+local GAME_TIME: number = 60 * 3
 
 local GAME_TIME_LEFT_ATTR: string = "GameTimeLeft"
 local TEAM_ATTR: string = "Team"
